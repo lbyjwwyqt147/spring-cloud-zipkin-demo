@@ -4,7 +4,8 @@ spring:
   application:
     name: sms-service
   rabbitmq:
-     host: 192.168.213.130
+     #host: 192.168.213.130
+     host: 192.168.0.102
      port: 5672
      username: rabbit
      password: 123456
@@ -18,7 +19,7 @@ spring:
       #rabbit:
         #enabled: true
     sampler:
-      percentage: 1
+      percentage: 1.0
 
 
 eureka:

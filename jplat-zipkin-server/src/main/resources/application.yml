@@ -14,19 +14,28 @@ spring:
     #port: 5672
     #username: rabbit
     #password: 123456
-  #sleuth:
-    #sampler:
-      #percentage: 1
-    #enabled: false
+  sleuth:
+    sampler:
+      percentage: 1.0
+    enabled: false
 
 
 zipkin:
-   # storage:
-   # type: mem
-   # StorageComponent: mem
+  #storage:
+    #type: elasticsearch
+    #StorageComponent: elasticsearch
+    #elasticsearch:
+      #cluster: elasticsearch
+      #hosts: 192.168.0.102:9200
+      #max-requests: 64
+      #index: zipkin
+      #index-shards: 5
+      #index-replicas: 1
+
   collector:
     rabbitmq:
-      uri: amqp://rabbit:123456@192.168.213.130:5672
+      #uri: amqp://rabbit:123456@192.168.213.130:5672
+      uri: amqp://rabbit:123456@192.168.0.102:5672
       queue: zipkin
 
 
