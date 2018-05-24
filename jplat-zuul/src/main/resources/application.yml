@@ -1,0 +1,48 @@
+
+server:
+  port: 28081
+spring:
+  application:
+    name: service-zuul
+  sleuth:
+    sampler:
+      probability: 1
+    enabled: true
+  rabbitmq:
+    host: 192.168.213.130
+    port: 5672
+    username: rabbit
+    password: 123456
+  zipkin:
+    sender:
+      type: rabbit
+    rabbitmq:
+      queue: zipkin
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:28080/eureka/
+
+
+
+zuul:
+  routes:
+    user-api:
+      path: /user/**
+     # serviceId: user-service          # 以 /user/  开头的请求会转发给user-service服务调用接口
+      url: http://127.0.0.1:28083         # 也可以配物理地址
+      stripPrefix: false              # zuul 默认会在请求路径上增加一个前缀  设置false 关闭这个功能
+    sms-api:
+      path: /sms/**
+      serviceId: sms-service          # 以 /sms/  开头的请求会转发给sms-service服务调用接口
+      stripPrefix: false
+
+    security-api:
+      path: /security/**
+      serviceId: security-service          # 以 /security/  开头的请求会转发给security-service服务调用接口
+      stripPrefix: false
+  host:
+    connect-timeout-millis: 1000
+    socket-timeout-millis: 5000

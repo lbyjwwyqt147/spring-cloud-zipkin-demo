@@ -1,0 +1,36 @@
+server:
+  port: 28083
+
+spring:
+  application:
+    name: user-service
+  rabbitmq:
+     host: 192.168.213.130
+     port: 5672
+     username: rabbit
+     password: 123456
+  zipkin:
+    service:
+      name: ${spring.application.name}
+    sender:
+      type: rabbit
+  sleuth:
+    #messaging:
+      #rabbit:
+        #enabled: true
+    sampler:
+      percentage: 1
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:28080/eureka/
+
+
+
+feign:
+  hystrix:
+    enabled: true   #开启Feign Hystrix 支持
+
+
