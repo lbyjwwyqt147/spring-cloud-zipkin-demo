@@ -3,10 +3,7 @@ package com.jwell.sms.manager.user;
 import com.jwell.entity.User;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "user-service",fallback = UserHystric.class)
 public interface IUserService {
@@ -23,5 +20,11 @@ public interface IUserService {
     User getUserInfo(@RequestParam(value = "userId") String userId);
 
     @PostMapping("/user/api/user/save")
-     User getUser (@RequestBody String user,@RequestParam(value = "sex") Byte sex);
+    User getUser (@RequestBody String user,@RequestParam(value = "sex") Byte sex);
+
+    @PutMapping("/user/api/user/status")
+    String putUserStatus(@RequestParam(value = "id") String id,@RequestParam(value = "status") Byte status);
+
+    @DeleteMapping("/user/api/user/del")
+    String delUser(@RequestParam(value = "id") String id);
 }
