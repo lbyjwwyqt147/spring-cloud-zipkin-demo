@@ -6,7 +6,6 @@ spring:
     name: user-service
   rabbitmq:
      host: 192.168.213.130
-     #host: 192.168.0.102
      port: 5672
      username: rabbit
      password: 123456
@@ -15,12 +14,14 @@ spring:
       name: ${spring.application.name}
     sender:
       type: rabbit
+    #rabbitmq:
+      #queue: zipkin
   sleuth:
-    #messaging:
-      #rabbit:
-        #enabled: true
+    messaging:
+      rabbit:
+        enabled: true
     sampler:
-      percentage: 1.0
+      percentage: 1
 
 
 eureka:

@@ -7,7 +7,9 @@ import com.jwell.sms.service.ISmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -22,8 +24,17 @@ public class SmsController {
     @Autowired
     private LoadBalancerClient client;
 
-    @GetMapping("/sms/api/sendMsg")
+    @GetMapping("/sms/api/msg")
     public String sendMsg(@RequestParam String name, @RequestParam String msg){
+        System.out.println(userService.userNmae(name));
+      /*  User user = userService.getUserInfo("1");
+        System.out.println(user);
+        System.out.println(user.getName());
+
+
+        User user1 = userService.getUserInfo("2");
+        userService.getUser(JSON.toJSONString(user1),(byte)3);
+*/
         return smsService.sendMessage(name,msg);
     }
 
@@ -32,7 +43,7 @@ public class SmsController {
         return userService.userNmae("俏如来");
     }
 
-    @GetMapping("/sms/api/userName/r")
+    @GetMapping("/sms/api/userName/1")
     public String getUserName(){
         //ServiceInstance instance = client.choose("user-service");
         String url = "http://user-service/user/api/name?name=魔如来";
@@ -48,16 +59,5 @@ public class SmsController {
         user.setName("孤鸿");
         return userService.getUser(JSON.toJSONString(user),(byte)4);
     }
-
-    @PutMapping("/sms/api/user/status")
-    String putUserStatus(@RequestParam(value = "id") String id,@RequestParam(value = "status") Byte status){
-        return userService.putUserStatus(id,status);
-    }
-
-    @DeleteMapping("/sms/api/user/del")
-    String delUser(@RequestParam(value = "id") String id){
-        return userService.delUser(id);
-    }
-
 
 }

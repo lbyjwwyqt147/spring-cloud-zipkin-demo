@@ -23,15 +23,5 @@ public class UserHystric implements IUserService {
         return new User();
     }
 
-    @Override
-    public String putUserStatus(String id, Byte status) {
-        return "修改用户状态调用出错";
-    }
-
-    @Override
-    public String delUser(String id) {
-        return "删除用户信息调用出错";
-    }
-
 
 }

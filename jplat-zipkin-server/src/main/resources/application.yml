@@ -5,45 +5,26 @@ server:
 spring:
   application:
     name: jplat-zipkin-server
-  datasource:
-    name: zipkin
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name:  com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.130.0.159:33060/zipkin?characterEncoding=utf8&useSSL=true
-    username: root
+  data:
+    mongodb:
+      uri: mongodb://http://192.168.213.130:27017
+      database: ziplin #表示当前程序不使用sleuth
+  rabbitmq:
+    host: 192.168.213.130
+    port: 5672
+    username: rabbit
     password: 123456
-    schema: classpath:/zipkin.sql
-    continue-on-error: true
-  #rabbitmq:
-    #host: 192.168.213.130
-    #port: 5672
-    #username: rabbit
-    #password: 123456
   sleuth:
     sampler:
-      percentage: 1.0    #默认的采样比率为0.1，不能看到所有请求数据，可以在每个客户端的application.yml中加入下面的配置，更改采样比率为1，就能看到所有的请求数据了，但是这样会增加接口调用延迟
+      percentage: 1
     enabled: false
 
 
-zipkin:
-  storage:
-    type: mysql
-    #type: elasticsearch
-    #StorageComponent: elasticsearch
-    #elasticsearch:
-      #cluster: elasticsearch
-      #hosts: 192.168.213.130:9200
-      #hosts: 192.168.0.102:9200
-      #max-requests: 64
-      #index: zipkin
-      #index-shards: 5
-      #index-replicas: 1
-
-  collector:
-    rabbitmq:
-      uri: amqp://rabbit:123456@192.168.213.130:5672
-      #uri: amqp://rabbit:123456@192.168.0.102:5672
-      queue: zipkin
+#zipkin:
+  #collector:
+    #rabbitmq:
+      #uri: amqp://rabbit:123456@192.168.213.130:5672
+      #queue: zipkin
 
 
 eureka:

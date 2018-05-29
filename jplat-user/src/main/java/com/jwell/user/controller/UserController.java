@@ -33,16 +33,4 @@ public class UserController {
         User user1 = JSON.parseObject(params,User.class);
         return userService.getUser(user1);
     }
-
-    @PutMapping("/api/user/status")
-    public String updateStatus(@RequestParam(value = "id") String id,@RequestParam(value = "status") Byte status){
-        System.out.println("进入修改状态方法");
-        return "修改状态成功，id："+id+" status："+status;
-    }
-
-    @DeleteMapping("/api/user/del")
-    public String del(@RequestParam(value = "id") String id){
-        System.out.println(" 进入删除方法 ");
-        return "删除成功 id："+id;
-    }
 }

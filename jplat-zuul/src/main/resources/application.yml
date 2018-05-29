@@ -6,18 +6,16 @@ spring:
     name: service-zuul
   sleuth:
     sampler:
-      probability: 1.0
+      probability: 1
     enabled: true
+  zipkin:
+    rabbitmq:
+      queue: zipkin
   rabbitmq:
     host: 192.168.213.130
     port: 5672
     username: rabbit
     password: 123456
-  zipkin:
-    sender:
-      type: rabbit
-    rabbitmq:
-      queue: zipkin
 
 
 eureka:
